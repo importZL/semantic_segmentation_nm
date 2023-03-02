@@ -436,8 +436,8 @@ class NetworkTrainer(object):
         
         ##### Pre-Train of Pix2Pix model #####
         total_iters = 0
-        if False:
-        # for epoch in range(50):
+        # if False:
+        for epoch in range(50):
             epoch_iters = 0
             for _ in range(self.num_batches_per_epoch):
                 data_dict = next(self.tr_gen)
@@ -491,6 +491,7 @@ class NetworkTrainer(object):
                             train_losses_epoch.append(l)
                 else:
                     for _ in range(self.num_batches_per_epoch):
+                        print("ok")
                         l = self.run_iteration(self.tr_gen, True)
                         train_losses_epoch.append(l)
 
