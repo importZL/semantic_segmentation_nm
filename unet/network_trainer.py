@@ -469,7 +469,7 @@ class NetworkTrainer(object):
                     message = '(epoch: %d, iters: %d ) ' % (epoch, epoch_iters)
                     for k, v in losses.items():
                         message += '%s: %.3f ' % (k, v)
-                    print(message)
+                    self.print_to_log_file(message)
         ##### End Pre-Train #####
         
         if not self.opt.train_end2end:

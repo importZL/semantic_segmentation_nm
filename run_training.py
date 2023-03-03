@@ -31,7 +31,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("network")
     parser.add_argument("network_trainer")
-    parser.add_argument('--gpu_ids', type=str, default='1', help='')
+    parser.add_argument('--gpu_ids', type=str, default='0', help='')
     parser.add_argument("task", help="can be task name or task id")
     parser.add_argument("fold", help='0, 1, ..., 5 or \'all\'')
     parser.add_argument("-val", "--validation_only", help="use this if you want to only run the validation",
