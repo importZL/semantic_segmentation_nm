@@ -491,7 +491,6 @@ class NetworkTrainer(object):
                             train_losses_epoch.append(l)
                 else:
                     for _ in range(self.num_batches_per_epoch):
-                        print("ok")
                         l = self.run_iteration(self.tr_gen, True)
                         train_losses_epoch.append(l)
 

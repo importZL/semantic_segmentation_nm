@@ -260,16 +260,18 @@ class nnUNetTrainerV2(nnUNetTrainer):
         # print(target[1].size()) # [9, 1, 20, 28, 20]
         # print(target[2].size()) # [9, 1, 10, 14, 10]
         aug_target = []
-        aug_target.append(func.rotate(target[0].reshape(-1, target[0].size()[-2], target[0].size()[-1]), 8))
-        aug_target.append(func.rotate(target[1].reshape(-1, target[1].size()[-2], target[1].size()[-1]), 8))
-        aug_target.append(func.rotate(target[2].reshape(-1, target[2].size()[-2], target[2].size()[-1]), 8))
+        aug_target.append(func.rotate(target[0][0:-1].reshape(-1, target[0].size()[-2], target[0].size()[-1]), 8))
+        aug_target.append(func.rotate(target[1][0:-1].reshape(-1, target[1].size()[-2], target[1].size()[-1]), 8))
+        aug_target.append(func.rotate(target[2][0:-1].reshape(-1, target[2].size()[-2], target[2].size()[-1]), 8))
 
         aug_data = self.model.netG(aug_target[0].unsqueeze(1))
 
-        aug_target[0] = torch.reshape(aug_target[0], (9, 1, 40, 56, 40))
-        aug_target[1] = torch.reshape(aug_target[1], (9, 1, 20, 28, 20))
-        aug_target[2] = torch.reshape(aug_target[2], (9, 1, 10, 14, 10))
-        aug_data = torch.reshape(aug_data, (9, 1, 40, 56, 40))
+        aug_target[0] = torch.reshape(aug_target[0], (8, 1, 40, 56, 40))
+        aug_target[1] = torch.reshape(aug_target[1], (8, 1, 20, 28, 20))
+        aug_target[2] = torch.reshape(aug_target[2], (8, 1, 10, 14, 10))
+        aug_data = torch.reshape(aug_data, (8, 1, 40, 56, 40))
+
+        data, target[0], target[1], target[2] = data[0:-1], target[0][0:-1], target[1][0:-1], target[2][0:-1]
 
         if self.fp16:
             with autocast():
