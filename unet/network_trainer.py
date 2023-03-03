@@ -451,8 +451,8 @@ class NetworkTrainer(object):
                     data = to_cuda(data, gpu_id=int(self.opt.gpu_ids))
                     target = to_cuda(target, gpu_id=int(self.opt.gpu_ids))
 
-                train_data = torch.reshape(data[0:-2], (-1, data.size()[-2], data.size()[-1])).unsqueeze(1)
-                train_target = torch.reshape(target[0][0:-2], (-1, target[0].size()[-2], target[0].size()[-1])).unsqueeze(1)
+                train_data = torch.reshape(data[0:-1], (-1, data.size()[-2], data.size()[-1])).unsqueeze(1)
+                train_target = torch.reshape(target[0][0:-1], (-1, target[0].size()[-2], target[0].size()[-1])).unsqueeze(1)
 
                 arch_data = torch.reshape(data[-1], (-1, data.size()[-2], data.size()[-1])).unsqueeze(1)
                 arch_target = torch.reshape(target[0][-1], (-1, target[0].size()[-2], target[0].size()[-1])).unsqueeze(1)
